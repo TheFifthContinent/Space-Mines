@@ -1,5 +1,6 @@
 package com.thefifthcontinent.spacemines;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -62,7 +63,11 @@ public class Main {
 
             do {
                 System.out.print("How much ore to sell: ");
-                oreToSell = input.nextInt();
+                try {
+                    oreToSell = input.nextInt();
+                } catch (InputMismatchException ex) {
+                    input.nextLine();
+                }
             } while(oreToSell < 0 || oreToSell > oreStored);
 
             oreStored -= oreToSell;
@@ -75,7 +80,11 @@ public class Main {
 
             do {
                 System.out.print("How many mines to sell: ");
-                minesToSell = input.nextInt();
+                try {
+                    minesToSell = input.nextInt();
+                } catch (InputMismatchException ex) {
+                    input.nextLine();
+                }
             } while(minesToSell < 0 || minesToSell > mines);
 
             mines -= minesToSell;
@@ -85,12 +94,16 @@ public class Main {
             System.out.println("\nMoney available: " + money + " Quatloos");
             System.out.println("Food price: " + foodPrice + " Quatloos");
             int foodToBuy = -1;
-            int total;
+            int total = 0;
 
             do {
                 System.out.print("How much food to buy: ");
-                foodToBuy = input.nextInt();
-                total = foodToBuy * foodPrice;
+                try {
+                    foodToBuy = input.nextInt();
+                    total = foodToBuy * foodPrice;
+                } catch (InputMismatchException ex) {
+                    input.nextLine();
+                }
             } while(foodToBuy < 0 || total > money);
 
             if (foodToBuy / population > 120) {
@@ -110,8 +123,12 @@ public class Main {
 
             do {
                 System.out.print("How many mines to buy: ");
-                minesToBuy = input.nextInt();
-                total = minesToBuy * minePrice;
+                try {
+                    minesToBuy = input.nextInt();
+                    total = minesToBuy * minePrice;
+                } catch (InputMismatchException ex) {
+                    input.nextLine();
+                }
             } while(minesToBuy < 0 || total > money);
 
             mines += minesToBuy;
